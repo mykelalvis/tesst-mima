@@ -25,13 +25,6 @@ import eu.maveniverse.maven.mima.extensions.mmr.ModelResponse;
 @javax.inject.Singleton
 @javax.inject.Named
 public class TrialRun {
-  private eu.maveniverse.maven.mima.context.Runtime runtime;
-
-  @javax.inject.Inject
-  public TrialRun(eu.maveniverse.maven.mima.context.Runtime runtime) {
-    this.runtime = runtime;
-  }
-
   //  @javax.inject.Inject
 //  public TrialRun() {
 //    this.runtime = Runtimes.INSTANCE.getRuntime();
@@ -41,7 +34,7 @@ public class TrialRun {
   public String model(ContextOverrides overrides, String artifactStr)
       throws VersionResolutionException, ArtifactResolutionException, ArtifactDescriptorException, IOException {
     requireNonNull(artifactStr);
-    this.runtime = Runtimes.INSTANCE.getRuntime();
+    Runtime runtime = Runtimes.INSTANCE.getRuntime();
 
     try (Context context = runtime.create(overrides)) {
       MavenModelReader mmr = new MavenModelReader(context);
@@ -62,18 +55,7 @@ public class TrialRun {
     }
   }
 
-  public static void main(String[] args) {
-    ClassLoader cl = TrialRun.class.getClassLoader();
-    com.google.inject.Injector inj = com.google.inject.Guice.createInjector( //
-        new org.eclipse.sisu.wire.WireModule( // auto-wires unresolved dependencies
-            new org.eclipse.sisu.space.SpaceModule( // scans and binds @Named components
-                new org.eclipse.sisu.space.URLClassSpace(cl) //
-                , org.eclipse.sisu.space.BeanScanning.ON //
-                , false) //
-        ) //
-    );
-
-    TrialRun xx = inj.getInstance(TrialRun.class);
-
+  public static void main(String[] args) throws Exception {
+    System.out.println(new TrialRun().model(ContextOverrides.create().withUserSettings(true).build(), "junit:junit:4.13.2"));
   }
 }
