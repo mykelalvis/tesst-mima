@@ -50,7 +50,9 @@
       <groupId>eu.maveniverse.maven.mima.runtime</groupId>
       <artifactId>standalone-sisu</artifactId>
       <version>${version.mima}</version>
-      <scope>runtime</scope>
+      <!-- runtime: if you want just runtime.create(overrides) -->
+      <!-- compile: if you want yourself to bring up Guice/Sisu -->
+      <scope>compile</scope>
       <exclusions>
         <exclusion>
           <groupId>com.google.inject</groupId>
