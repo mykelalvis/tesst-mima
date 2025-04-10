@@ -18,27 +18,29 @@
     @formatter:on
 
 -->
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
 <!--	<parent>-->
 <!--		<groupId>org.infrastructurebuilder</groupId>-->
 <!--		<artifactId>ibparent</artifactId>-->
 <!--		<version>107</version>-->
 <!--	</parent>-->
 
-	<groupId>test</groupId>
-	<artifactId>test-mima</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+  <groupId>test</groupId>
+  <artifactId>test-mima</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
-	<name>${project.artifactId}</name>
+  <name>${project.artifactId}</name>
 	<!-- URL for site gen -->
 
-	<properties>
-	<version.mima>2.4.22</version.mima>
-	</properties>
+  <properties>
+    <version.mima>2.4.22</version.mima>
+    <version.resolver>1.9.22</version.resolver>
+  </properties>
 
-	<dependencies>
+  <dependencies>
 	<!--
 
 	-->
@@ -47,50 +49,106 @@
       <artifactId>context</artifactId>
       <version>${version.mima}</version>
     </dependency>
-<dependency>
-  <groupId>eu.maveniverse.maven.mima.runtime</groupId>
-  <artifactId>standalone-sisu</artifactId>
-  <version>${version.mima}</version>
-  <scope>runtime</scope>
-</dependency>
+    <dependency>
+      <groupId>eu.maveniverse.maven.mima.runtime</groupId>
+      <artifactId>standalone-sisu</artifactId>
+      <version>${version.mima}</version>
+      <scope>runtime</scope>
+    </dependency>
 
-<dependency>
-<groupId>com.google.inject</groupId>
-<artifactId>guice</artifactId>
-<version>6.0.0</version>
-</dependency>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>6.0.0</version>
+    </dependency>
 
-<dependency>
-<groupId>org.eclipse.sisu</groupId>
-<artifactId>org.eclipse.sisu.inject</artifactId>
-<version>0.9.0.M3</version>
-</dependency>
-	<dependency>
-	<groupId>org.slf4j</groupId>
-	<artifactId>slf4j-api</artifactId>
-	<version>2.1.0-alpha1</version>
-	</dependency>
-	<dependency>
-	<groupId>org.slf4j</groupId>
-	<artifactId>slf4j-simple</artifactId>
-	<version>2.1.0-alpha1</version>
-	</dependency>
-	<dependency>
-	<groupId>org.junit.jupiter</groupId>
-	<artifactId>junit-jupiter-api</artifactId>
-	<version>5.12.0</version>
-	<scope>test</scope>
-	</dependency>
-	<dependency>
-	<groupId>org.junit.jupiter</groupId>
-	<artifactId>junit-jupiter-engine</artifactId>
-	<version>5.12.0</version>
-	<scope>test</scope>
-	</dependency>
-	</dependencies>
+    <dependency>
+      <groupId>org.eclipse.sisu</groupId>
+      <artifactId>org.eclipse.sisu.inject</artifactId>
+      <version>0.9.0.M3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>2.1.0-alpha1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>2.1.0-alpha1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.12.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.12.0</version>
+      <scope>test</scope>
+    </dependency>
 
-	<build>
-		<plugins>
-		</plugins>
-	</build>
+        <dependency>
+      <groupId>eu.maveniverse.maven.mima.extensions</groupId>
+      <artifactId>mmr</artifactId>
+            <version>${version.mima}</version>
+
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-model</artifactId>
+      <version>3.9.9</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.resolver</groupId>
+      <artifactId>maven-resolver-api</artifactId>
+      <version>${version.resolver}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.resolver</groupId>
+      <artifactId>maven-resolver-spi</artifactId>
+      <version>${version.resolver}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.resolver</groupId>
+      <artifactId>maven-resolver-impl</artifactId>
+      <version>${version.resolver}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- runtime dependency (dormant outside of Maven) -->
+    <dependency>
+      <groupId>eu.maveniverse.maven.mima.runtime</groupId>
+      <artifactId>embedded-maven</artifactId>
+      <version>${version.mima}</version>
+      <scope>runtime</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>run-main</id>
+            <phase>test</phase>  <!-- Or any other desired phase -->
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>testme.TrialRun</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
