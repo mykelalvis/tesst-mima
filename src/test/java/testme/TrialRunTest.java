@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import testme.TrialRun;
 
-class ObjectMapperUtilsTest {
+class TrialRunTest {
   // test something?
 
 }
